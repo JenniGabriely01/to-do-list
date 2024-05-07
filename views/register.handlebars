@@ -1,0 +1,35 @@
+<section class="container-total">
+
+    <div class="conteudo-esquerda">
+        <form action="/cadastrar-tarefa" method="post">
+            <h1>Create task</h1>
+
+            <input type="text" placeholder="Digite sua tarefa" name="tarefa">
+            <input type="text" placeholder="Digite a data" name="data">
+            <input type="text" placeholder="Digite a categoria" name="categoria">
+
+
+            <select id="estado" name="estado">
+                <option>Qual o estado?</option>
+                <option value="feito">To do</option>
+                <option value="em-progresso">In progress</option>
+                <option value="pronto">Done</option>
+            </select>
+
+            <select id="nivel_importancia" name="nivel_importancia">
+                <option>Qual a importância?</option>
+                <option value="alto">high importance</option>
+                <option value="medio">medium importance</option>
+                <option value="baixo">low importance</option>
+            </select>
+
+            <button>Create</button>
+        </form>
+    </div>
+
+    <div class="conteudo-direita">
+        <img src="/img/icone-task.png" alt="">
+        <h2>Welcome!</h2>
+        <p>Increase your productivity and register your task</p>
+    </div>
+</section>

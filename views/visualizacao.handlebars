@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualização de Tarefas</title>
+</head>
+<body>
+    <h1>Visualização de Tarefas</h1>
+    <ul>
+        {{#each tarefas}}
+            <li>{{nome}} - {{estado}} - {{nivel_importancia}} - {{categoria}} - {{data_criacao}}</li>
+        {{/each}}
+    </ul>
+</body>
+</html>
