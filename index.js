@@ -61,6 +61,29 @@ app.post('/cadastrar-tarefa', (req, res) => {
         });
 });
 
+app.post('/cadastrar-tarefa', (req, res) => {
+    const { nome, estado, nivel_importancia, categoria, data_criacao } = req.body;
+    console.log('Dados recebidos:', { nome, estado, nivel_importancia, categoria, data_criacao });
+
+    // Realizar a consulta para inserir a tarefa
+    connection.query('INSERT INTO Tarefas (nome, estado, nivel_importancia, categoria, data_criacao) VALUES (?, ?, ?, ?, ?)',
+        [nome, estado, nivel_importancia, categoria, data_criacao],
+        (err, results) => {
+            if (err) {
+                console.error('Erro ao inserir tarefa:', err);
+                // Exibir detalhes do erro no console
+                console.error(err.message);
+                // Enviar uma resposta ao cliente com uma mensagem de erro mais específica
+                res.status(500).send(`Erro ao salvar tarefa: ${err.message}`);
+            } else {
+                // Se a tarefa for salva com sucesso, redirecione o usuário para a página de visualização
+                res.redirect('/visualizacao');
+            }
+        });
+});
+
+
+
 // Rota para exibir a página de visualização das tarefas
 app.get("/visualizacao", (req, res) => {
     connection.query('SELECT * FROM Tarefas', (err, results) => {
