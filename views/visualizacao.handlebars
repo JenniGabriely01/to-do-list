@@ -1,16 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualização de Tarefas</title>
+   
 </head>
+
 <body>
-    <h1>Visualização de Tarefas</h1>
-    <ul>
-        {{#each tarefas}}
-            <li>{{nome}} - {{estado}} - {{nivel_importancia}} - {{categoria}} - {{data_criacao}}</li>
-        {{/each}}
-    </ul>
+    <section class="conteudo-visualizacao">
+        <aside class="menu-lateral">
+            <div class="user">
+                <img src="/img/user.svg" alt="icone user">
+                <p>Welcome back, <strong>User!</strong></p>
+            </div>
+            {{!--
+            <hr> --}}
+
+            <ul>
+                <div class="link">
+                    <img src="/img/calendar.svg" alt="">
+                    <li><a href="#">Calendar</a></li>
+                </div>
+
+                <div class="link">
+                    <img src="/img/time.svg" alt="">
+                    <li><a href="#">Timers</a> </li>
+                </div>
+
+                <div class="link">
+                    <img src="/img/people.svg" alt="">
+                    <li><a href="#">My Teams</a></li>
+                </div>
+
+            </ul>
+        </aside>
+
+        <div class="conteudo-tarefas">
+            <header>
+                <h3>Task Tracker Drafts</h3>
+                <div class="itens-header">
+                    <img src="/img/lupa.svg" alt="lupa">
+                    <button>+ Add task</button>
+                </div>
+            </header>
+            <hr>
+
+            {{#each tarefas}}
+            <div class="card-tarefa white-background">
+                <div class="titulos-task">
+                    <h4>{{nome}}</h4>
+                    <a href="/{{!-- AQUIIIIII --}}">Ver detalhes</a>
+                    <p>{{data_criacao}}</p>
+                </div>
+
+                <div>
+                    <button>{{categoria}}</button>
+                    <button>{{nivel_importancia}}</button>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </section>
+
+
 </body>
+
 </html>
