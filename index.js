@@ -2,7 +2,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2');
-const path = require('path'); 
+const path = require('path');
 
 const app = express();
 const port = 3000;
@@ -24,11 +24,22 @@ connection.connect((err) => {
     console.log('Conexão bem-sucedida com o banco de dados MySQL!');
 });
 
-// Configuração do Handlebars
-app.engine('handlebars', exphbs({
+// Criar o engine Handlebars com os helpers registrados
+const hbs = exphbs.create({
     defaultLayout: 'main',
     layoutsDir: path.join(__dirname, 'views', 'layouts'),
-}));
+    helpers: {
+        ifEquals: function (arg1, arg2, options) {
+            return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+        }
+    }
+});
+
+// Configurar o engine Handlebars para o Express
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+
+
 app.set('view engine', 'handlebars');
 
 // Middleware para análise do corpo da solicitação
@@ -74,10 +85,16 @@ app.get("/visualizacao", (req, res) => {
             const inProgressTasks = results.filter(task => task.estado === 'em_progresso');
             const doneTasks = results.filter(task => task.estado === 'pronto');
 
-            res.render('visualizacao', { 
+            // Formatando a data para uma representação mais compacta e legível
+            results.forEach(task => {
+                task.data_criacao = new Date(task.data_criacao).toLocaleDateString('pt-BR');
+            });
+
+            res.render('visualizacao', {
                 toDoTasks: toDoTasks,
                 inProgressTasks: inProgressTasks,
-                doneTasks: doneTasks
+                doneTasks: doneTasks,
+                allTasks: results // Passando todas as tarefas para a visualização, inclusive com a data formatada
             });
         }
     });

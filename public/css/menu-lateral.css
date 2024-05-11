@@ -1,0 +1,61 @@
+.conteudo-visualizacao {
+    display: flex;
+}
+
+.menu-lateral {
+    height: 100% auto;
+    flex: 0 0 350px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    padding: 50px 100px 0 30px;
+    color: #A5A68F;
+    position: relative;
+}
+
+.user{
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.user p{
+    width: 55%;
+    font-size: 0.9rem;
+    margin-left: 15px;
+}
+
+ul, li a{
+    list-style: none;
+    text-decoration: none;  
+}
+
+a{
+    color: #A5A68F;
+    font-size: 0.9rem;
+}
+
+
+ul{
+    margin-top: 90px;
+}   
+
+.link{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    border-radius: 20px;
+    transition: 0.2s all;
+}
+
+.link:hover{
+    background-color: #f0eeee;
+}
+
+.hr-menu {
+    position: absolute; 
+    width: 100%; 
+    border: none; 
+    border-top: 1px solid #F2DBD5; /* Adiciona uma borda superior */
+    left: 0; /* Adiciona o padding esquerdo ao hr-menu */
+    right: 0;
+}

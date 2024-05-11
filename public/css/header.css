@@ -1,0 +1,49 @@
+.conteudo-tarefas{
+    padding: 50px;
+    width: 100%;
+}
+
+header{
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+header h3{
+    color: #A5A68F;
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+.itens-header{
+    align-items: center;
+    display: flex;
+}
+
+.itens-header img{
+    margin-right: 15px;
+}
+
+.itens-header button{
+    background-color: #A5A68F;
+    padding: 12px 28px;
+    border-radius: 25px;
+    border: 0;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s all;
+}
+
+.itens-header button:hover{
+    background-color: #b0b1a0;
+}
+
+.hr-header{
+    height: 1px;
+    border: 0;
+    color: #F2DBD5;
+    background-color: #F2DBD5;
+    margin: 50px 0 50px 0;
+}

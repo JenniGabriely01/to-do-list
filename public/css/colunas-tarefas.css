@@ -1,0 +1,118 @@
+.colunas{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.coluna-done,
+.coluna-to-do,
+.coluna-in-progress{
+    border-radius: 20px;
+
+}
+
+.coluna-to-do{
+    background-color: #F1EED6;
+}
+
+.coluna-to-do h3{
+    color: #A89A1D;
+}
+
+.coluna-to-do h3,
+.coluna-in-progress h3,
+.coluna-done h3{
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin: 38px 0 14px 28px;
+}
+
+.coluna-in-progress{
+    background-color: #C8D1EE;
+}
+
+.coluna-in-progress h3{
+    color: #395ACE;
+}
+
+.coluna-done{
+    background-color: #CFDDD1;
+}
+
+.coluna-done h3{
+    color: #287236;
+}
+
+.card-tarefa{
+    background-color: #ffff; 
+    border-radius: 15px;
+    display: flex;
+    width: 15.5rem;
+    margin: 20px;
+    padding: 27px 21px;
+}
+
+.titulos-task h4{
+    color: #222;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.titulos-task a{
+    color: #222;
+    text-decoration: none;
+    font-size: 0.6rem;
+    cursor: pointer;
+    transition: 0.2s all;
+}
+
+.titulos-task a:hover{
+    text-decoration: underline;
+}
+
+.titulos-task p{
+    font-size: 0.7rem;
+    margin-top: 22px;
+    color: #868686;
+}
+
+.buttons{
+    text-align: right;
+    margin-top: 20px;
+}
+
+/* Botão para alta importância (vermelho) */
+.high-importance {
+    background-color: #F08C77;
+}
+
+/* Botão para média importância (amarelo) */
+.medium-importance {
+    background-color: #7DAA86;
+}
+
+/* Botão para baixa importância (azul) */
+.low-importance {
+    background-color: #7D9AAA;
+}
+
+.high-importance,
+.low-importance,
+.medium-importance{
+    color: #fff;
+    border: 0;
+    border-radius: 15px;
+    padding: 5px 6px;
+    font-weight: 500;
+    font-size: 0.75rem;
+    margin-top: 24px;
+
+}
+
+.categoria{
+    background-color: #F2DBD5;
+    color: #D9B2A9;
+    padding: 3.5px 8.5px;
+    border: 0;
+    border-radius: 15px;
+}

@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/menu-lateral.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/colunas-tarefas.css">
     <title>Visualização de Tarefas</title>
 
 </head>
@@ -15,8 +18,7 @@
                 <img src="/img/user.svg" alt="icone user">
                 <p>Welcome back, <strong>User!</strong></p>
             </div>
-            {{!--
-            <hr> --}}
+            <hr class="hr-menu">
 
             <ul>
                 <div class="link">
@@ -45,7 +47,7 @@
                     <button>+ Add task</button>
                 </div>
             </header>
-            <hr>
+            <hr class="hr-header">
 
 
             <div class="colunas">
@@ -60,10 +62,19 @@
                             <p>{{data_criacao}}</p>
                         </div>
 
-                        <div>
-                            <button>{{categoria}}</button>
-                            <button>{{nivel_importancia}}</button>
+                        <div class="buttons">
+                            <button class="categoria">
+                                {{categoria}}
+                            </button>
+                            {{#ifEquals nivel_importancia 'alto'}}
+                            <button class="importance-btn high-importance">High importance</button>
+                            {{else ifEquals nivel_importancia 'medio'}}
+                            <button class="importance-btn medium-importance">Medium importance</button>
+                            {{else ifEquals nivel_importancia 'baixo'}}
+                            <button class="importance-btn low-importance">Low importance</button>
+                            {{/ifEquals}}
                         </div>
+
                     </div>
                     {{/each}}
                 </div>
@@ -72,16 +83,26 @@
                     <h3>In Progress</h3>
                     {{#each inProgressTasks}}
                     <div class="card-tarefa">
+
                         <div class="titulos-task">
                             <h4>{{nome}}</h4>
                             <a href="/">View Details</a>
                             <p>{{data_criacao}}</p>
                         </div>
 
-                        <div>
-                            <button>{{categoria}}</button>
-                            <button>{{nivel_importancia}}</button>
+                        <div class="buttons">
+                            <button class="categoria">
+                                {{categoria}}
+                            </button>
+                            {{#ifEquals nivel_importancia 'alto'}}
+                            <button class="importance-btn high-importance">High importance</button>
+                            {{else ifEquals nivel_importancia 'medio'}}
+                            <button class="importance-btn medium-importance">Medium importance</button>
+                            {{else ifEquals nivel_importancia 'baixo'}}
+                            <button class="importance-btn low-importance">Low importance</button>
+                            {{/ifEquals}}
                         </div>
+
                     </div>
                     {{/each}}
                 </div>
@@ -96,10 +117,19 @@
                             <p>{{data_criacao}}</p>
                         </div>
 
-                        <div>
-                            <button>{{categoria}}</button>
-                            <button>{{nivel_importancia}}</button>
+                        <div class="buttons">
+                            <button class="categoria">
+                                {{categoria}}
+                            </button>
+                            {{#ifEquals nivel_importancia 'alto'}}
+                            <button class="importance-btn high-importance">High importance</button>
+                            {{else ifEquals nivel_importancia 'medio'}}
+                            <button class="importance-btn medium-importance">Medium importance</button>
+                            {{else ifEquals nivel_importancia 'baixo'}}
+                            <button class="importance-btn low-importance">Low importance</button>
+                            {{/ifEquals}}
                         </div>
+
                     </div>
                     {{/each}}
                 </div>
