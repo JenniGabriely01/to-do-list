@@ -193,10 +193,74 @@ header h3{
     font-weight: 500;
 }
 
+.colunas{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.coluna-done,
+.coluna-to-do,
+.coluna-in-progress{
+    border-radius: 20px;
+
+}
+
+.coluna-to-do{
+    background-color: #F1EED6;
+}
+
+.coluna-to-do h3{
+    color: #A89A1D;
+}
+
+.coluna-to-do h3,
+.coluna-in-progress h3,
+.coluna-done h3{
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin: 38px 0 14px 28px;
+}
+
+.coluna-in-progress{
+    background-color: #C8D1EE;
+}
+
+.coluna-in-progress h3{
+    color: #395ACE;
+}
+
+.coluna-done{
+    background-color: #CFDDD1;
+}
+
+.coluna-done h3{
+    color: #287236;
+}
+
 .card-tarefa{
-    background-color: #783636; /* colocar como branco dps */
-    width: 215px;
+    background-color: #ffff; 
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    width: 15rem;
+    height: 8rem;
     margin: 20px;
     padding: 19px 21px;
+}
+
+.titulos-task h4{
+    color: #222;
+    font-weight: 600;
+}
+
+.titulos-task a{
+    color: #222;
+    text-decoration: none;
+}
+
+.titulos-task p{
+    font-size: 0.7rem;
+    color: #d9d9d9;
 }
 
