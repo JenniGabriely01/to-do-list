@@ -49,7 +49,11 @@
     display: flex;
     width: 15.5rem;
     margin: 20px;
-    padding: 27px 21px;
+    padding: 27px 15px;
+}
+
+.titulos-task{
+    width: 100%;
 }
 
 .titulos-task h4{
@@ -106,6 +110,7 @@
     font-weight: 500;
     font-size: 0.75rem;
     margin-top: 24px;
+    white-space: nowrap;
 
 }
 

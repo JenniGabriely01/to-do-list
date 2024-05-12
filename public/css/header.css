@@ -24,7 +24,7 @@ header h3{
     margin-right: 15px;
 }
 
-.itens-header button{
+.itens-header a{
     background-color: #A5A68F;
     padding: 12px 28px;
     border-radius: 25px;
@@ -34,9 +34,10 @@ header h3{
     font-weight: 500;
     cursor: pointer;
     transition: 0.2s all;
+    text-decoration: none;
 }
 
-.itens-header button:hover{
+.itens-header a:hover{
     background-color: #b0b1a0;
 }
 

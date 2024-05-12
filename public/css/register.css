@@ -13,57 +13,62 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
 }
 
 .conteudo-esquerda h1 {
     font-size: 2rem;
     color: #D9B2A9;
     font-weight: 500;
-    margin-bottom: 28px;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-.conteudo-esquerda input {
-    text-overflow: ellipsis;
-    outline: none;
-}
-
-input,
 select {
     border: 1px solid #A5A68F;
-    height: 50px;
-    margin-bottom: 22px;
+    padding: 15px 20px;
+    margin-bottom: 30px;
     border-radius: 10px;
+    color: #868686;
+    font-weight: 400;
+    outline: none;
+    letter-spacing: 0.1em;
+    font-size: 0.75rem;
 }
 
-select {
-    border: 1px solid #A5A68F;
-    /* Estilo da borda */
-    outline: none;
-}
 
 select option {
-    color: #868686;
+    color: #222;
 }
 
-input::placeholder {
-    text-align: left;
-    padding-left: 13px;
+.submit-buttons{
+    display: flex;
+    justify-content: center;
 }
 
-.conteudo-esquerda button {
-    margin-top: 28px;
-    height: 50px;
+.submit-buttons button,
+.submit-buttons a{
     font-size: 1rem;
-    border-radius: 13px;
+    padding: 12px 30px;
+    border-radius: 10px;
     border: 0;
     color: #FEFEFE;
     background-color: #D9B2A9;
     transition: 0.2s ease;
     cursor: pointer;
+    text-decoration: none;
+    width: 50%;
+    text-align: center;
 }
 
-.conteudo-esquerda button:hover {
+.submit-buttons button{
+    margin-right: 10px;
+}
+
+.submit-buttons button:hover {
+    background-color: #d8bbb5;
+}
+
+.submit-buttons a:hover{
     background-color: #d8bbb5;
 }
 
@@ -90,4 +95,42 @@ form {
     font-size: 1.3rem;
     font-weight: 300;
     width: 50%;
+    text-align: center;
 }
+
+.inputBox {
+    position: relative;
+  }
+  
+  .inputBox input {
+    padding: 15px 20px;
+    outline: none;
+    background: transparent;
+    border-radius: 10px;
+    color: #A5A68F;
+    border: 1px solid #A5A68F;
+    font-size: 1em;
+    margin-bottom: 30px;
+    width: 100%;
+  }
+  
+  .inputBox span {
+    position: absolute;
+    left: 0;
+    padding: 15px 20px;
+    pointer-events: none;
+    font-size: 0.7rem;
+    transition: 0.4s cubic-bezier(0.05, 0.81, 0, 0.93);
+    color: #868686;
+    letter-spacing: 0.1em;
+  }
+  
+  .inputBox input:focus ~ span,
+  .inputBox input:valid ~ span {
+    font-size: 0.7em;
+    transform: translateY(-20px);
+    padding: 0 5px;
+    border-radius: 2px;
+    letter-spacing: 0em;
+  }
+ 

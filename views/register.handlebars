@@ -7,9 +7,25 @@
         <form action="/cadastrar-tarefa" method="post">
             <h1>Create task</h1>
 
-            <input type="text" placeholder="Digite sua tarefa" name="nome">
-            <input type="text" placeholder="Digite a data" name="data_criacao">
-            <input type="text" placeholder="Digite a categoria" name="categoria">
+
+            <div class="inputs">
+                <div class="inputBox">
+                    <input required="" name="nome" type="text">
+                    <span>Digite sua tarefa</span>
+                </div>
+
+                <div class="inputBox">
+                    <input required="" name="data_criacao" type="text">
+                    <span>Digite a data</span>
+                </div>
+
+                <div class="inputBox">
+                    <input required="" name="categoria" type="text">
+                    <span>Digite a categoria</span>
+                </div>
+            </div>
+
+
 
             <select id="estado" name="estado">
                 <option disabled selected>Qual o estado?</option>
@@ -25,9 +41,16 @@
                 <option value="baixo">Low importance</option>
             </select>
 
-            <button type="submit">Create</button>
+
+            <div class="submit-buttons">
+                <button type="submit">Create</button>
+                <a href="/visualizacao">View tasks</a>
+            </div>
+
         </form>
     </div>
+
+
 
     <div class="conteudo-direita">
         <img src="/img/icone-task.png" alt="">
