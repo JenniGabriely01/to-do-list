@@ -151,6 +151,16 @@ app.post('/remove/:id', (req, res) => {
     });
 });
 
+/* rota para perfil */
+app.get("/perfil", (req, res) => {
+    res.render('perfil');
+})
+
+/* rota para notificações */
+app.get('/notificacoes', (req, res) => {
+    res.render('notificacoes');
+})
+
 
 // Fechar a conexão quando o servidor for encerrado
 process.on('SIGINT', () => {
