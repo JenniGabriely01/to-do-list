@@ -1,10 +1,26 @@
-<section>
-    <form action="/visualizacao" method="get">
-        <h1>digite seu nome</h1>
-        <input type="text" id="name" name="name" required>
-        <button type="submit">
-            Enviar
-        </button>
-    </form>
+<head>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<section class="conteudo-total">
+
+    <div class="conteudo-esquerda">
+        <h1>Create account</h1>
+        <form action="/visualizacao" method="get">            
+            <div class="inputBox">
+                <input required="" type="text" id="name" name="name">
+                <span>Type your name</span>
+            </div>
+            <button type="submit">
+                Submit
+            </button>
+        </form>
+    </div>
+
+    <div class="conteudo-direita">
+        <img src="/img/icone-task.png" alt="">
+        <h2>Welcome!</h2>
+        <p>Increase your productivity and register your task</p>
+    </div>
 
 </section>

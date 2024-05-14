@@ -32,7 +32,7 @@ As tarefas são classificadas por nível de importância, permitindo uma fácil 
 - CSS: estilização da interface do usuário.
 </details>
 
--- img projeto 
+![img do Projeto](imgProjeto.png)
 ## Pré-requisitos
 
 :warning: [Node](https://nodejs.org/en/download/)

@@ -151,7 +151,7 @@
     .high-importance,
     .low-importance,
     .medium-importance {
-        padding: 3px 7px;
+        padding: 4px 7px;
         font-size: 0.60rem;
         margin-top: 24px;
         white-space: nowrap;
