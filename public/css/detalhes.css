@@ -40,13 +40,13 @@ select option {
     color: #222;
 }
 
-.submit-buttons{
+/* .submit-buttons{
     display: flex;
     justify-content: center;
-}
+} */
 
 .submit-buttons button,
-.submit-buttons a{
+.submit-buttons input{
     font-size: 1rem;
     padding: 12px 30px;
     border-radius: 10px;
@@ -55,9 +55,7 @@ select option {
     background-color: #D9B2A9;
     transition: 0.2s ease;
     cursor: pointer;
-    text-decoration: none;
     width: 50%;
-    text-align: center;
 }
 
 .submit-buttons a{
@@ -68,8 +66,13 @@ select option {
     background-color: #d8bbb5;
 }
 
-.submit-buttons a:hover{
+.submit-buttons input:hover{
     background-color: #d8bbb5;
+}
+
+.btn-remover{
+    margin-left: 370px;
+    margin-top: -42px;
 }
 
 form {
@@ -133,7 +136,6 @@ form {
     display: flex;
     flex-direction: column;
     width: 20vw;
-    margin: 20px;
     padding: 30px 18px;
 }
 
@@ -151,6 +153,12 @@ form {
 
 .conteudo-de-baixo{
     display: flex;
+    justify-content: space-between;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: column;
 }
 
 .conteudo-de-baixo p{

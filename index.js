@@ -50,7 +50,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Rota principal para exibir a página de cadastro de tarefas
 app.get("/", (req, res) => {
-    res.render("register");
+    res.render("login");
+    /* res.render("register"); */
 });
 
 // Rota para lidar com o cadastro de tarefa
@@ -75,6 +76,7 @@ app.post('/cadastrar-tarefa', (req, res) => {
 
 // Rota para exibir a página de visualização das tarefas
 app.get("/visualizacao", (req, res) => {
+    const userName = req.query.name || 'Visitor';
     connection.query('SELECT * FROM Tarefas', (err, results) => {
         if (err) {
             console.error('Erro ao recuperar tarefas:', err);
@@ -87,10 +89,15 @@ app.get("/visualizacao", (req, res) => {
 
             // Formatando a data para uma representação mais compacta e legível
             results.forEach(task => {
-                task.data_criacao = new Date(task.data_criacao).toLocaleDateString('pt-BR');
+                const date = new Date(task.data_criacao);
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                task.data_criacao = `${year}-${month}-${day}`
             });
 
             res.render('visualizacao', {
+                userName: userName,
                 toDoTasks: toDoTasks,
                 inProgressTasks: inProgressTasks,
                 doneTasks: doneTasks,
@@ -100,7 +107,11 @@ app.get("/visualizacao", (req, res) => {
     });
 });
 
-/* ver detalhes por id */
+app.get('/register', (req, res) => {
+    res.render('register')
+})
+
+/* ver detalhes da tarefa por id */
 app.get('/visualizacao/:id', (req, res) => {
     const id = req.params.id;
     const sql = 'SELECT * FROM Tarefas WHERE id = ?';
@@ -112,7 +123,14 @@ app.get('/visualizacao/:id', (req, res) => {
         } else {
             if (data.length > 0) {
                 const edit = data[0];
-                edit.data_criacao = new Date(edit.data_criacao).toLocaleDateString('pt-BR'); // Formatar a data
+                /* converte a string da data em um obj DATE no javascript */
+                const date = new Date(edit.data_criacao);
+                const year = date.getFullYear();
+                /* getMonth() + 1 - garente que o mês vai ser entre janeiro e dezembro ( 1 a 12) */
+                /* padStart - garantindo que serão sempre dois números, adicionando um 0 se necessário */
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                edit.data_criacao = `${year}-${month}-${day}`
                 res.render('edit', { edit });
             } else {
                 res.status(404).send('Tarefa não encontrada');
@@ -121,13 +139,13 @@ app.get('/visualizacao/:id', (req, res) => {
     });
 });
 
-
-app.post("/visualizacao/update",  (req, res) => {
+/* rota editar a tarefa */
+app.post("/visualizacao/update", (req, res) => {
     const { id, nome, estado, nivel_importancia, categoria, data_criacao } = req.body;
 
     const sql = `UPDATE Tarefas SET nome = '${nome}', estado = '${estado}', nivel_importancia = '${nivel_importancia}', categoria = '${categoria}', data_criacao = '${data_criacao}' WHERE id = ${id}`;
 
-    connection.query(sql, function(err) {
+    connection.query(sql, function (err) {
         if (err) {
             console.log("error", err);
             return;
@@ -137,11 +155,11 @@ app.post("/visualizacao/update",  (req, res) => {
     });
 });
 
-
+/* lógica e rota para remover tarefas */
 app.post('/remove/:id', (req, res) => {
     const id = req.params.id;
     const sql = `DELETE FROM Tarefas WHERE id = ${id}`;
-    connection.query(sql, function(err) {
+    connection.query(sql, function (err) {
         if (err) {
             console.log(err);
             res.status(500).send('Erro ao remover tarefa');
