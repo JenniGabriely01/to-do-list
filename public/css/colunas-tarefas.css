@@ -1,6 +1,7 @@
 .colunas {
     display: flex;
     justify-content: space-between;
+    margin-top: 33px;
 }
 
 
@@ -9,6 +10,7 @@
 .coluna-in-progress {
     border-radius: 20px;
     width: 20vw;
+    height: 20vw;
 }
 
 .coluna-to-do {

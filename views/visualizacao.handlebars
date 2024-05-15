@@ -40,14 +40,18 @@
         </aside>
 
         <div class="conteudo-tarefas">
-            <header>
-                <h3>Task Tracker Drafts</h3>
-                <div class="itens-header">
-                    <img src="/img/lupa.svg" alt="lupa">
-                    <a href="/">+ Add task</a>
-                </div>
-            </header>
-            <hr class="hr-header">
+            <div class="fixed">
+                <header>
+                    <h3>Task Tracker Drafts</h3>
+                    <div class="itens-header">
+                        <img src="/img/lupa.svg" alt="lupa">
+                        <a href="/">+ Add task</a>
+                    </div>
+                </header>
+                <hr class="hr-header">
+                <div class="fade-out"></div>
+            </div>
+
 
 
             <div class="colunas">
@@ -58,7 +62,7 @@
                     <div class="card-tarefa">
                         <div class="titulos-task">
                             <h4>{{nome}}</h4>
-                            <a href="/{{!-- AQUIIIIII --}}">View Details</a>
+                            <a href="/visualizacao/{{id}}">View Details</a>
                             <p>{{data_criacao}}</p>
                         </div>
 
@@ -86,7 +90,7 @@
 
                         <div class="titulos-task">
                             <h4>{{nome}}</h4>
-                            <a href="/">View Details</a>
+                            <a href="/visualizacao/{{id}}">View Details</a>
                             <p>{{data_criacao}}</p>
                         </div>
 
@@ -113,7 +117,7 @@
                     <div class="card-tarefa">
                         <div class="titulos-task">
                             <h4>{{nome}}</h4>
-                            <a href="/">View Details</a>
+                            <a href="/visualizacao/{{id}}">View Details</a>
                             <p>{{data_criacao}}</p>
                         </div>
 

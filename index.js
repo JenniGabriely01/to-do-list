@@ -94,8 +94,53 @@ app.get("/visualizacao", (req, res) => {
                 toDoTasks: toDoTasks,
                 inProgressTasks: inProgressTasks,
                 doneTasks: doneTasks,
-                allTasks: results // Passando todas as tarefas para a visualização, inclusive com a data formatada
+                allTasks: results
             });
+        }
+    });
+});
+
+/* ver detalhes por id */
+app.get('/visualizacao/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = `SELECT * FROM Tarefas WHERE id = ${id}`;
+
+    connection.query(sql, function (err, data) {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Erro ao recuperar tarefa');
+        } else {
+            const edit = data[0];
+            res.render('edit', { edit });
+        }
+    });
+});
+
+app.post("/visualizacao/update",  (req, res) => {
+    const { id, nome, estado, nivel_importancia, categoria, data_criacao } = req.body;
+
+    const sql = `UPDATE Tarefas SET nome = '${nome}', estado = '${estado}', nivel_importancia = '${nivel_importancia}', categoria = '${categoria}', data_criacao = '${data_criacao}' WHERE id = ${id}`;
+
+    connection.query(sql, function(err) {
+        if (err) {
+            console.log("error", err);
+            return;
+        }
+
+        res.redirect('/visualizacao');
+    });
+});
+
+
+app.post('/remove/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = `DELETE FROM Tarefas WHERE id = ${id}`;
+    connection.query(sql, function(err) {
+        if (err) {
+            console.log(err);
+            res.status(500).send('Erro ao remover tarefa');
+        } else {
+            res.redirect('/visualizacao');
         }
     });
 });

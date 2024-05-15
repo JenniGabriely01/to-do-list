@@ -1,0 +1,69 @@
+<head>
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+
+
+<section class="container-total">
+    <div class="conteudo-esquerda">
+        <form action="/visualizacao/update" method="post">
+            <input type="hidden" name="id" value="{{edit.id}}">
+
+
+            <div class="inputs">
+                <div class="inputBox">
+                    <input required="" name="nome" type="text">
+                    <span>Digite sua tarefa</span>
+                </div>
+
+                <div class="inputBox">
+                    <input required="" name="data_criacao" type="text">
+                    <span>Digite a data</span>
+                </div>
+
+                <div class="inputBox">
+                    <input required="" name="categoria" type="text">
+                    <span>Digite a categoria</span>
+                </div>
+            </div>
+
+
+
+            <select id="estado" name="estado">
+                <option disabled selected>Qual o estado?</option>
+                <option value="feito">To do</option>
+                <option value="em_progresso">In progress</option>
+                <option value="pronto">Done</option>
+            </select>
+
+            <select id="nivel_importancia" name="nivel_importancia">
+                <option disabled selected>Qual a importância?</option>
+                <option value="alto">High importance</option>
+                <option value="medio">Medium importance</option>
+                <option value="baixo">Low importance</option>
+            </select>
+
+
+            <div class="submit-buttons">
+                <button type="submit">EDIT</button>
+         
+            </div>
+
+        </form>
+    </div>
+
+<form action="/remove/{{edit.id}}" method="post">
+    <input type="submit" value="Remover">
+</form>
+
+    <div class="conteudo-direita">
+        <img src="/img/icone-task.png" alt="">
+        <h2>Welcome!</h2>
+        <p>Increase your productivity and register your task</p>
+    </div>
+</section>
+
+
+
+
+
+
