@@ -1,4 +1,4 @@
-.colunas{
+.colunas {
     display: flex;
     justify-content: space-between;
 }
@@ -6,63 +6,63 @@
 
 .coluna-done,
 .coluna-to-do,
-.coluna-in-progress{
+.coluna-in-progress {
     border-radius: 20px;
-
+    width: 20vw;
 }
 
-.coluna-to-do{
+.coluna-to-do {
     background-color: #F1EED6;
 }
 
-.coluna-to-do h3{
+.coluna-to-do h3 {
     color: #A89A1D;
 }
 
 .coluna-to-do h3,
 .coluna-in-progress h3,
-.coluna-done h3{
+.coluna-done h3 {
     font-weight: 600;
     font-size: 1.2rem;
     margin: 38px 0 14px 28px;
 }
 
-.coluna-in-progress{
+.coluna-in-progress {
     background-color: #C8D1EE;
 }
 
-.coluna-in-progress h3{
+.coluna-in-progress h3 {
     color: #395ACE;
 }
 
-.coluna-done{
+.coluna-done {
     background-color: #CFDDD1;
 }
 
-.coluna-done h3{
+.coluna-done h3 {
     color: #287236;
 }
 
-.card-tarefa{
-    background-color: #ffff; 
+.card-tarefa {
+    background-color: #ffff;
     border-radius: 15px;
     display: flex;
-    width: 15.5rem;
+    width: 17vw;
     margin: 20px;
     padding: 27px 15px;
 }
 
-.titulos-task{
+.titulos-task {
     width: 100%;
 }
 
-.titulos-task h4{
+.titulos-task h4 {
     color: #222;
     font-weight: 600;
     font-size: 1.2rem;
 }
 
-.titulos-task a{
+.titulos-task a {
     color: #222;
     text-decoration: none;
     font-size: 0.6rem;
@@ -70,17 +70,17 @@
     transition: 0.2s all;
 }
 
-.titulos-task a:hover{
+.titulos-task a:hover {
     text-decoration: underline;
 }
 
-.titulos-task p{
+.titulos-task p {
     font-size: 0.7rem;
     margin-top: 22px;
     color: #868686;
 }
 
-.buttons{
+.buttons {
     text-align: right;
     margin-top: 20px;
 }
@@ -102,7 +102,7 @@
 
 .high-importance,
 .low-importance,
-.medium-importance{
+.medium-importance {
     color: #fff;
     border: 0;
     border-radius: 15px;
@@ -111,13 +111,51 @@
     font-size: 0.75rem;
     margin-top: 24px;
     white-space: nowrap;
-
 }
 
-.categoria{
+.categoria {
     background-color: #F2DBD5;
     color: #D9B2A9;
     padding: 3.5px 8.5px;
     border: 0;
     border-radius: 15px;
+}
+
+@media (min-width: 601px) and (max-width: 1200px) {
+
+    .coluna-done,
+    .coluna-to-do,
+    .coluna-in-progress {
+        width: 17vw;
+        margin-right: 10px;
+    }
+
+    .card-tarefa {
+        width: 14vw;
+        padding: 20px 10px;
+    }
+
+    .titulos-task h4 {
+        font-size: 1rem;
+    }
+
+    .buttons {
+        display: none;
+    }
+}
+
+@media (min-width: 1201px) and (max-width: 1300px) {
+
+    .high-importance,
+    .low-importance,
+    .medium-importance {
+        padding: 3px 7px;
+        font-size: 0.60rem;
+        margin-top: 24px;
+        white-space: nowrap;
+    }
+
+    .titulos-task h4 {
+        font-size: 1.1rem;
+    }
 }
