@@ -15,7 +15,7 @@
     align-items: center;
 }
 
-.conteudo-esquerda h1 {
+.conteudo-esquerda h2 {
     font-size: 2rem;
     color: #D9B2A9;
     font-weight: 500;
@@ -78,26 +78,6 @@ form {
     width: 360px;
 }
 
-.conteudo-direita {
-    background-color: #A5A68F;
-    color: #FEFEFE;
-    height: 100%;
-}
-
-.conteudo-direita h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 15px;
-    margin-top: 10px;
-}
-
-.conteudo-direita p {
-    font-size: 1.3rem;
-    font-weight: 300;
-    width: 50%;
-    text-align: center;
-}
-
 .inputBox {
     position: relative;
   }
@@ -133,4 +113,85 @@ form {
     border-radius: 2px;
     letter-spacing: 0em;
   }
+
+.conteudo-direita {
+    background-color: #A5A68F;
+    color: #FEFEFE;
+    height: 100%;
+}
+
+.conteudo-direita h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
+.tarefa{
+    background-color: #ffff;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    margin: 20px;
+    padding: 30px 18px;
+}
+
+.tarefa h4{
+    font-size: 1.2rem;
+    color: #222;
+}
+
+.hr-edit{
+    background-color: #A5A68F;
+    height: 1px;
+    border: 0;
+    margin-bottom: 15px;
+}
+
+.conteudo-de-baixo{
+    display: flex;
+}
+
+.conteudo-de-baixo p{
+    font-size: 0.7rem;
+    color: #868686;
+}
+
+.categoria{
+    background-color: #F2DBD5;
+    color: #D9B2A9;
+    padding: 3.5px 8.5px;
+    border: 0;
+    border-radius: 15px;
+}
+
+/* Botão para alta importância (vermelho) */
+.high-importance {
+    background-color: #F08C77;
+}
+
+/* Botão para média importância (amarelo) */
+.medium-importance {
+    background-color: #7DAA86;
+}
+
+/* Botão para baixa importância (azul) */
+.low-importance {
+    background-color: #7D9AAA;
+}
+
+.high-importance,
+.low-importance,
+.medium-importance {
+    color: #fff;
+    border: 0;
+    border-radius: 15px;
+    padding: 5px 6px;
+    font-weight: 500;
+    font-size: 0.75rem;
+    margin-top: 15px;
+    white-space: nowrap;
+}
+
  

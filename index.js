@@ -103,18 +103,24 @@ app.get("/visualizacao", (req, res) => {
 /* ver detalhes por id */
 app.get('/visualizacao/:id', (req, res) => {
     const id = req.params.id;
-    const sql = `SELECT * FROM Tarefas WHERE id = ${id}`;
+    const sql = 'SELECT * FROM Tarefas WHERE id = ?';
 
-    connection.query(sql, function (err, data) {
+    connection.query(sql, [id], (err, data) => {
         if (err) {
             console.error(err);
             res.status(500).send('Erro ao recuperar tarefa');
         } else {
-            const edit = data[0];
-            res.render('edit', { edit });
+            if (data.length > 0) {
+                const edit = data[0];
+                edit.data_criacao = new Date(edit.data_criacao).toLocaleDateString('pt-BR'); // Formatar a data
+                res.render('edit', { edit });
+            } else {
+                res.status(404).send('Tarefa não encontrada');
+            }
         }
     });
 });
+
 
 app.post("/visualizacao/update",  (req, res) => {
     const { id, nome, estado, nivel_importancia, categoria, data_criacao } = req.body;
