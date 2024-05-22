@@ -1,3 +1,45 @@
-<section>
-    <h1>oioioioioioioioi Notifacations</h1>
+<head>
+    <link rel="stylesheet" href="/css/menu-lateral.css">
+    <link rel="stylesheet" href="/css/header.css">
+</head>
+
+<section class="conteudo-visualizacao">
+    <aside class="menu-lateral">
+        <div class="user">
+            <a href="/perfil"><img src="/img/user.svg" alt="icone user"></a>
+            <p>Welcome back, <strong>{{userName}}!</strong></p>
+        </div>
+        <hr class="hr-menu">
+
+        <ul>
+            <div class="link">
+                <img src="/img/calendar.svg" alt="">
+                <li><a href="#">Calendar</a></li>
+            </div>
+
+            <div class="link">
+                <img src="/img/profile.svg" alt="">
+                <li><a href="/perfil?name={{userName}}">My Profile</a></li>
+            </div>
+
+            <div class="link" style="background-color: #f0eeee;">
+                <img src="/img/bell.svg" alt="">
+                <li><a href="/notificacoes?name={{userName}}">Notifications</a></li>
+            </div>
+
+        </ul>
+    </aside>
+
+    <div class="conteudo-tarefas">
+        <div class="fixed">
+            <header>
+                <h3>Task Tracker Drafts</h3>
+                <div class="itens-header">
+                    <img src="/img/lupa.svg" alt="lupa">
+                    <a href="/register">+ Add task</a>
+                </div>
+            </header>
+            <hr class="hr-header">
+            <div class="fade-out"></div>
+        </div>
 </section>

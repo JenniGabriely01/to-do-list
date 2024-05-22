@@ -39,40 +39,16 @@ const hbs = exphbs.create({
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-
-app.set('view engine', 'handlebars');
-
 // Middleware para análise do corpo da solicitação
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Configuração para servir arquivos estáticos da pasta 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Rota principal para exibir a página de cadastro de tarefas
+// Rota principal para exibir a página de login
 app.get("/", (req, res) => {
     res.render("login");
-    /* res.render("register"); */
 });
-
-// Rota para lidar com o cadastro de tarefa
-app.post('/cadastrar-tarefa', (req, res) => {
-    const { nome, estado, nivel_importancia, categoria, data_criacao } = req.body;
-    console.log('Dados recebidos:', { nome, estado, nivel_importancia, categoria, data_criacao });
-
-    // Realizar a consulta para inserir a tarefa
-    connection.query('INSERT INTO Tarefas (nome, estado, nivel_importancia, categoria, data_criacao) VALUES (?, ?, ?, ?, ?)',
-        [nome, estado, nivel_importancia, categoria, data_criacao],
-        (err, results) => {
-            if (err) {
-                console.error('Erro ao inserir tarefa:', err);
-                res.status(500).send('Erro ao salvar tarefa');
-            } else {
-                // Se a tarefa for salva com sucesso, redirecione o usuário para a página de visualização
-                res.redirect('/visualizacao');
-            }
-        });
-});
-
 
 // Rota para exibir a página de visualização das tarefas
 app.get("/visualizacao", (req, res) => {
@@ -82,18 +58,16 @@ app.get("/visualizacao", (req, res) => {
             console.error('Erro ao recuperar tarefas:', err);
             res.status(500).send('Erro ao recuperar tarefas');
         } else {
-            // Separar as tarefas por estado
             const toDoTasks = results.filter(task => task.estado === 'feito');
             const inProgressTasks = results.filter(task => task.estado === 'em_progresso');
             const doneTasks = results.filter(task => task.estado === 'pronto');
 
-            // Formatando a data para uma representação mais compacta e legível
             results.forEach(task => {
                 const date = new Date(task.data_criacao);
                 const year = date.getFullYear();
                 const month = String(date.getMonth() + 1).padStart(2, '0');
                 const day = String(date.getDate()).padStart(2, '0');
-                task.data_criacao = `${year}-${month}-${day}`
+                task.data_criacao = `${year}-${month}-${day}`;
             });
 
             res.render('visualizacao', {
@@ -107,9 +81,25 @@ app.get("/visualizacao", (req, res) => {
     });
 });
 
+// Rota para perfil, garantindo que o nome do usuário seja passado na query string
+app.get("/perfil", (req, res) => {
+    const userName = req.query.name || 'Visitor';
+    res.render('perfil', {
+        userName: userName
+    });
+});
+
+// Rota para notificações, garantindo que o nome do usuário seja passado na query string
+app.get('/notificacoes', (req, res) => {
+    const userName = req.query.name || 'Visitor';
+    res.render('notificacoes', {
+        userName: userName
+    });
+});
+
 app.get('/register', (req, res) => {
-    res.render('register')
-})
+    res.render('register');
+});
 
 /* ver detalhes da tarefa por id */
 app.get('/visualizacao/:id', (req, res) => {
@@ -123,14 +113,11 @@ app.get('/visualizacao/:id', (req, res) => {
         } else {
             if (data.length > 0) {
                 const edit = data[0];
-                /* converte a string da data em um obj DATE no javascript */
                 const date = new Date(edit.data_criacao);
                 const year = date.getFullYear();
-                /* getMonth() + 1 - garente que o mês vai ser entre janeiro e dezembro ( 1 a 12) */
-                /* padStart - garantindo que serão sempre dois números, adicionando um 0 se necessário */
                 const month = String(date.getMonth() + 1).padStart(2, '0');
                 const day = String(date.getDate()).padStart(2, '0');
-                edit.data_criacao = `${year}-${month}-${day}`
+                edit.data_criacao = `${year}-${month}-${day}`;
                 res.render('edit', { edit });
             } else {
                 res.status(404).send('Tarefa não encontrada');
@@ -168,17 +155,6 @@ app.post('/remove/:id', (req, res) => {
         }
     });
 });
-
-/* rota para perfil */
-app.get("/perfil", (req, res) => {
-    res.render('perfil');
-})
-
-/* rota para notificações */
-app.get('/notificacoes', (req, res) => {
-    res.render('notificacoes');
-})
-
 
 // Fechar a conexão quando o servidor for encerrado
 process.on('SIGINT', () => {
