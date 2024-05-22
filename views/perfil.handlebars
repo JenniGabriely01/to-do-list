@@ -1,45 +1,61 @@
 <head>
     <link rel="stylesheet" href="/css/menu-lateral.css">
     <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/perfil.css">
 </head>
 
-<section class="conteudo-visualizacao">
+<main class="conteudo-visualizacao">
     <aside class="menu-lateral">
         <div class="user">
-            <a href="/perfil"><img src="/img/user.svg" alt="icone user"></a>
+            <a href="/perfil?name={{userName}}&email={{email}}"><img src="/img/user.svg" alt="icone user"></a>
             <p>Welcome back, <strong>{{userName}}!</strong></p>
         </div>
         <hr class="hr-menu">
-
         <ul>
             <div class="link">
-                <img src="/img/calendar.svg" alt="">
-                <li><a href="#">Calendar</a></li>
+                <img src="/img/home.svg" alt="">
+                <li><a href="/visualizacao?name={{userName}}&email={{email}}">Home</a></li>
             </div>
-
             <div class="link" style="background-color: #f0eeee;">
-                <img src="/img/profile.svg" alt="">
-                <li><a href="/perfil?name={{userName}}">My Profile</a></li>
+                <img src="/img/Myprofile-page.svg" alt="">
+                <li><a href="/perfil?name={{userName}}&email={{email}}">My Profile</a></li>
             </div>
-
             <div class="link">
                 <img src="/img/bell.svg" alt="">
-                <li><a href="/notificacoes?name={{userName}}">Notifications</a></li>
+                <li><a href="/notificacoes?name={{userName}}&email={{email}}">Notification</a></li>
             </div>
-
         </ul>
     </aside>
-
-    <div class="conteudo-tarefas">
-        <div class="fixed">
-            <header>
-                <h3>Task Tracker Drafts</h3>
+    <section class="conteudo-tarefas">
+        <header class="fixed">
+            <div class="header">
+                <h3>My Profile</h3>
                 <div class="itens-header">
-                    <img src="/img/lupa.svg" alt="lupa">
-                    <a href="/register">+ Add task</a>
+                    <a href="https://github.com/JenniGabriely01/to-do-list" target="_blank">
+                        <img src="/img/info.svg" alt="lupa">
+                    </a>
+                    <a class="add-task" href="/register">+ Add task</a>
                 </div>
-            </header>
+            </div>
             <hr class="hr-header">
-            <div class="fade-out"></div>
+        </header>
+    </section>
+</main>
+<section class="conteudo-perfil">
+    <div class="perfil">
+        <img src="/img/user.svg" alt="lupa">
+        <div class="titulos-perfil">
+            <h4>{{userName}}</h4>
+            <a href="#">Edit Profile</a>
         </div>
+    </div>
+    <div class="input-info">
+        <h5>Personal Informations</h5>
+        <div class="perfil">
+            <p>{{userName}}</p>
+        </div>
+        <div class="perfil">
+            <p>{{email}}</p>
+        </div>
+    </div>
 </section>

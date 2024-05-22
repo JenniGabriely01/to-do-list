@@ -1,0 +1,43 @@
+.container-notificacoes{
+    margin-left: 400px;
+}
+
+.conteudo-notications h3{
+    color: #A5A68F;
+    font-weight: 500;
+    margin-bottom: 30px;
+    font-size: 1.4rem;
+}
+
+.container-notificacoes p{
+    color: #F08C77;
+}
+
+.notifications{
+    background-color: #F0EEEE;
+    margin: 0 0 20px 0;
+    padding: 20px 30px;
+    width: 60%;
+    border-radius: 15px;
+}
+
+.notifications p{
+    color: #A5A68F;
+    font-size: 0.7rem;
+    margin-top: 15px;
+}
+
+.titulo-notificacoes{
+    display: flex;
+    align-items: center;
+}
+
+.titulo-notificacoes h2{
+    color: #F08C77;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+
+

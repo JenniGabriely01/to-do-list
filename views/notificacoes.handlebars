@@ -1,45 +1,107 @@
 <head>
     <link rel="stylesheet" href="/css/menu-lateral.css">
     <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/notificacoes.css">
 </head>
 
-<section class="conteudo-visualizacao">
+<main class="conteudo-visualizacao">
     <aside class="menu-lateral">
         <div class="user">
-            <a href="/perfil"><img src="/img/user.svg" alt="icone user"></a>
+            <a href="/perfil?name={{userName}}&email={{email}}"><img src="/img/user.svg" alt="icone user"></a>
             <p>Welcome back, <strong>{{userName}}!</strong></p>
         </div>
         <hr class="hr-menu">
 
         <ul>
             <div class="link">
-                <img src="/img/calendar.svg" alt="">
-                <li><a href="#">Calendar</a></li>
+                <img src="/img/home.svg" alt="">
+                <li><a href="/visualizacao?name={{userName}}&email={{email}}">Home</a></li>
             </div>
 
             <div class="link">
-                <img src="/img/profile.svg" alt="">
-                <li><a href="/perfil?name={{userName}}">My Profile</a></li>
+                <img src="/img/Myprofile.svg" alt="">
+                <li><a href="/perfil?name={{userName}}&email={{email}}">My Profile</a></li>
             </div>
 
             <div class="link" style="background-color: #f0eeee;">
-                <img src="/img/bell.svg" alt="">
-                <li><a href="/notificacoes?name={{userName}}">Notifications</a></li>
+                <img src="/img/bell-page.svg" alt="">
+                <li><a href="/notificacoes?name={{userName}}&email={{email}}">Notification</a></li>
             </div>
 
         </ul>
     </aside>
 
-    <div class="conteudo-tarefas">
-        <div class="fixed">
-            <header>
-                <h3>Task Tracker Drafts</h3>
+    <section class="conteudo-tarefas">
+        <header class="fixed">
+            <div class="header">
+                <h3>Notifications</h3>
                 <div class="itens-header">
-                    <img src="/img/lupa.svg" alt="lupa">
-                    <a href="/register">+ Add task</a>
+                    <a href="https://github.com/JenniGabriely01/to-do-list" target="_blank">
+                        <img src="/img/info.svg" alt="lupa">
+                    </a>
+                    <a class="add-task" href="/register">+ Add task</a>
                 </div>
-            </header>
+            </div>
             <hr class="hr-header">
-            <div class="fade-out"></div>
+        </header>
+    </section>
+
+</main>
+
+<section class="container-notificacoes">
+
+    <div class="conteudo-notications">
+        <h3>Recent Notifications</h3>
+
+        {{!-- caso não tenha notificações --}}
+        {{#if noNotifications}}
+        <p>No notifications at this time.</p>
+        {{else}}
+
+        {{!-- caso expire hoje --}}
+        {{#if notificationsToday}}
+        <div class="notifications">
+            <div class="titulo-notificacoes">
+                <img src="/img/hora.svg" alt="">
+                <h2>Your task expires today!</h2>
+            </div>
+            {{#each notificationsToday}}
+            <div class="notification">
+                <p>{{{this}}}</p>
+            </div>
+            {{/each}}
         </div>
+        {{/if}}
+
+        {{!-- caso a tarefa expire amanhã --}}
+        {{#if notificationsTomorrow}}
+        <div class="notifications">
+            <div class="titulo-notificacoes">
+                <img src="/img/hora.svg" alt="">
+                <h2>Your task expires tomorrow!</h2>
+            </div>
+            {{#each notificationsTomorrow}}
+            <div class="notification">
+                <p>{{{this}}}</p>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        {{!-- caso a tarefa tenha expirado --}}
+        {{#if notificationsExpired}}
+        <div class="notifications">
+            <div class="titulo-notificacoes">
+                <img src="/img/alert.svg" alt="">
+                <h2>A Task Just Expired!</h2>
+            </div>
+            {{#each notificationsExpired}}
+            <div class="notification">
+                <p>{{{this}}}</p>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+        {{/if}}
+    </div>
 </section>
