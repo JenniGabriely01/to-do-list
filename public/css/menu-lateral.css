@@ -12,6 +12,7 @@
     position: fixed;
     top: 0;
     left: 0;
+    max-width: 350px;
 }
 
 .user{
@@ -24,6 +25,8 @@
     width: 55%;
     font-size: 0.9rem;
     margin-left: 15px;
+    text-overflow: ellipsis;
+    overflow: hidden; 
 }
 
 ul, li a{
