@@ -149,8 +149,6 @@ app.get('/visualizacao/:id', (req, res) => {
     });
 });
 
-
-
 app.post('/remove/:id', (req, res) => {
     const id = req.params.id;
     const userName = req.body.name || 'Visitor';
@@ -166,7 +164,6 @@ app.post('/remove/:id', (req, res) => {
         }
     });
 });
-
 
 /* rota editar a tarefa */
 app.post("/visualizacao/update", (req, res) => {
@@ -185,8 +182,6 @@ app.post("/visualizacao/update", (req, res) => {
         res.redirect(`/visualizacao?name=${userName}&email=${emailValue}`);
     });
 });
-
-
 
 /* lógica e rota para remover tarefas */
 app.get('/visualizacao/:id', (req, res) => {
@@ -227,7 +222,6 @@ app.get("/perfil", (req, res) => {
     });
 });
 
-/* rota para notificações */
 app.get('/notificacoes', (req, res) => {
     const userName = req.query.name || 'Visitor';
     const email = req.query.email || 'seuemail@email.com';
@@ -237,31 +231,21 @@ app.get('/notificacoes', (req, res) => {
             console.error('Erro ao recuperar tarefas:', err);
             res.status(500).send('Erro ao recuperar tarefas');
         } else {
-            const notificationsToday = [];
-            const notificationsTomorrow = [];
             const notificationsExpired = [];
             const today = new Date();
-            today.setHours(0, 0, 0, 0);
+            today.setHours(0, 0, 0, 0); // Normalize to midnight
 
             results.forEach(task => {
-                if (!task.data_criacao || !task.nome) {
-                    // Ignorar tarefas com valores NULL
-                    return;
+                if (!task.data_criacao) {
+                    console.warn(`Tarefa '${task.nome}' possui data de criação nula. Ignorando...`);
+                    return; // Ignorar esta tarefa e passar para a próxima
                 }
 
                 const taskDate = new Date(task.data_criacao);
-                taskDate.setHours(0, 0, 0, 0); // Normalize to midnight to compare only dates
-                const timeDiff = taskDate - today;
-                const dayDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                taskDate.setHours(0, 0, 0, 0); // Normalize to midnight
 
-                if (dayDiff === 0) {
-                    // Caso a tarefa expire hoje
-                    notificationsToday.push(`The deadline for task <strong>${task.nome}</strong> is today. Please ensure all necessary actions are taken to complete it on time.`);
-                } else if (dayDiff === 1) {
-                    // Caso a tarefa expire amanhã
-                    notificationsTomorrow.push(`Attention! The deadline for task <strong>${task.nome}</strong> is approaching rapidly. Ensure all necessary actions are taken to meet the deadline effectively.`);
-                } else if (dayDiff < 0) {
-                    // Caso ela já esteja expirada
+                if (taskDate < today) {
+                    // Caso a tarefa já esteja expirada
                     notificationsExpired.push(`The deadline for task <strong>${task.nome}</strong> has passed. Please review and address any outstanding items immediately to minimize any potential impact on our project timeline.`);
                 }
             });
@@ -269,10 +253,8 @@ app.get('/notificacoes', (req, res) => {
             res.render('notificacoes', {
                 userName: userName,
                 email: email,
-                notificationsToday: notificationsToday.length > 0 ? notificationsToday : null,
-                notificationsTomorrow: notificationsTomorrow.length > 0 ? notificationsTomorrow : null,
                 notificationsExpired: notificationsExpired.length > 0 ? notificationsExpired : null,
-                noNotifications: notificationsToday.length === 0 && notificationsTomorrow.length === 0 && notificationsExpired.length === 0
+                noNotifications: notificationsExpired.length === 0
             });
         }
     });

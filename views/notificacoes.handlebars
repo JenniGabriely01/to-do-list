@@ -37,7 +37,7 @@
                 <h3>Notifications</h3>
                 <div class="itens-header">
                     <a href="https://github.com/JenniGabriely01/to-do-list" target="_blank">
-                        <img src="/img/info.svg" alt="icone info">
+                        <img src="/img/info.svg" alt="lupa">
                     </a>
                     <a class="add-task" href="/register?name={{userName}}&email={{email}}">+ Add task</a>
                 </div>
@@ -57,36 +57,6 @@
         {{#if noNotifications}}
         <p>No notifications at this time.</p>
         {{else}}
-
-        {{!-- caso expire hoje --}}
-        {{#if notificationsToday}}
-        <div class="notifications">
-            <div class="titulo-notificacoes">
-                <img src="/img/hora.svg" alt="">
-                <h2>Your task expires today!</h2>
-            </div>
-            {{#each notificationsToday}}
-            <div class="notification">
-                <p>{{{this}}}</p>
-            </div>
-            {{/each}}
-        </div>
-        {{/if}}
-
-        {{!-- caso a tarefa expire amanhã --}}
-        {{#if notificationsTomorrow}}
-        <div class="notifications">
-            <div class="titulo-notificacoes">
-                <img src="/img/hora.svg" alt="">
-                <h2>Your task expires tomorrow!</h2>
-            </div>
-            {{#each notificationsTomorrow}}
-            <div class="notification">
-                <p>{{{this}}}</p>
-            </div>
-            {{/each}}
-        </div>
-        {{/if}}
 
         {{!-- caso a tarefa tenha expirado --}}
         {{#if notificationsExpired}}
