@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql2');
 const path = require('path');
 
+
 const app = express();
 const port = 3000;
 
@@ -39,6 +40,9 @@ const hbs = exphbs.create({
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
+
+app.set('view engine', 'handlebars');
+
 // Middleware para análise do corpo da solicitação
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -69,6 +73,7 @@ app.post('/cadastrar-tarefa', (req, res) => {
             }
         });
 });
+
 
 // Rota para exibir a página de visualização das tarefas
 app.get("/visualizacao", (req, res) => {
@@ -116,7 +121,7 @@ app.get('/register', (req, res) => {
     });
 });
 
-// Ver detalhes da tarefa por id
+/* ver detalhes da tarefa por id */
 app.get('/visualizacao/:id', (req, res) => {
     const id = req.params.id;
     const userName = req.query.name || 'Visitor';
@@ -144,6 +149,8 @@ app.get('/visualizacao/:id', (req, res) => {
     });
 });
 
+
+
 app.post('/remove/:id', (req, res) => {
     const id = req.params.id;
     const userName = req.body.name || 'Visitor';
@@ -160,15 +167,16 @@ app.post('/remove/:id', (req, res) => {
     });
 });
 
-// Rota editar a tarefa
+
+/* rota editar a tarefa */
 app.post("/visualizacao/update", (req, res) => {
     const { id, nome, estado, nivel_importancia, categoria, data_criacao, name, email } = req.body;
     const userName = name || 'Visitor';
     const emailValue = email || 'seuemail@email.com';
 
-    const sql = `UPDATE Tarefas SET nome = ?, estado = ?, nivel_importancia = ?, categoria = ?, data_criacao = ? WHERE id = ?`;
+    const sql = `UPDATE Tarefas SET nome = '${nome}', estado = '${estado}', nivel_importancia = '${nivel_importancia}', categoria = '${categoria}', data_criacao = '${data_criacao}' WHERE id = ${id}`;
 
-    connection.query(sql, [nome, estado, nivel_importancia, categoria, data_criacao, id], function (err) {
+    connection.query(sql, function (err) {
         if (err) {
             console.log("error", err);
             return;
@@ -178,7 +186,37 @@ app.post("/visualizacao/update", (req, res) => {
     });
 });
 
-// Rota para perfil
+
+
+/* lógica e rota para remover tarefas */
+app.get('/visualizacao/:id', (req, res) => {
+    const id = req.params.id;
+    const userName = req.query.name || 'Visitor';
+    const email = req.query.email || 'seuemail@email.com';
+
+    const sql = 'SELECT * FROM Tarefas WHERE id = ?';
+
+    connection.query(sql, [id], (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Erro ao recuperar tarefa');
+        } else {
+            if (data.length > 0) {
+                const edit = data[0];
+                const date = new Date(edit.data_criacao);
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                edit.data_criacao = `${year}-${month}-${day}`;
+                res.render('edit', { edit, userName, email });
+            } else {
+                res.status(404).send('Tarefa não encontrada');
+            }
+        }
+    });
+});
+
+/* rota para perfil */
 app.get("/perfil", (req, res) => {
     const userName = req.query.name || 'Visitor';
     const email = req.query.email || 'seuemail@email.com';
@@ -189,7 +227,7 @@ app.get("/perfil", (req, res) => {
     });
 });
 
-// Rota para notificações
+/* rota para notificações */
 app.get('/notificacoes', (req, res) => {
     const userName = req.query.name || 'Visitor';
     const email = req.query.email || 'seuemail@email.com';
@@ -206,16 +244,21 @@ app.get('/notificacoes', (req, res) => {
             today.setHours(0, 0, 0, 0);
 
             results.forEach(task => {
+                if (!task.data_criacao || !task.nome) {
+                    // Ignorar tarefas com valores NULL
+                    return;
+                }
+
                 const taskDate = new Date(task.data_criacao);
                 taskDate.setHours(0, 0, 0, 0); // Normalize to midnight to compare only dates
                 const timeDiff = taskDate - today;
                 const dayDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
                 if (dayDiff === 0) {
-                    // Caso a tarefa expirar hoje
+                    // Caso a tarefa expire hoje
                     notificationsToday.push(`The deadline for task <strong>${task.nome}</strong> is today. Please ensure all necessary actions are taken to complete it on time.`);
                 } else if (dayDiff === 1) {
-                    // Caso a tarefa expirar amanhã
+                    // Caso a tarefa expire amanhã
                     notificationsTomorrow.push(`Attention! The deadline for task <strong>${task.nome}</strong> is approaching rapidly. Ensure all necessary actions are taken to meet the deadline effectively.`);
                 } else if (dayDiff < 0) {
                     // Caso ela já esteja expirada

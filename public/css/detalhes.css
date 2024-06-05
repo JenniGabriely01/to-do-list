@@ -40,11 +40,6 @@ select option {
     color: #222;
 }
 
-/* .submit-buttons{
-    display: flex;
-    justify-content: center;
-} */
-
 .submit-buttons button,
 .submit-buttons input{
     font-size: 1rem;

@@ -4,7 +4,6 @@
     margin-top: 33px;
 }
 
-
 .coluna-done,
 .coluna-to-do,
 .coluna-in-progress {
@@ -45,23 +44,21 @@
 }
 
 .card-tarefa {
-    background-color: #ffff;
+    background-color: #fff;
     border-radius: 15px;
     display: flex;
+    flex-direction: column;
     width: 17vw;
     margin: 20px;
     padding: 27px 15px;
     margin-bottom: 38px;
 }
 
-.titulos-task {
-    width: 100%;
-}
-
 .titulos-task h4 {
     color: #222;
     font-weight: 600;
     font-size: 1rem;
+    word-break: break-word; /* Quebrar palavras longas para evitar estouro do contêiner */
 }
 
 .titulos-task a {
@@ -78,13 +75,15 @@
 
 .titulos-task p {
     font-size: 0.7rem;
-    margin-top: 22px;
+    margin-top: 15px;
     color: #868686;
 }
 
 .buttons {
-    text-align: right;
-    margin-top: 20px;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 10px; 
 }
 
 /* Botão para alta importância (vermelho) */
@@ -111,20 +110,18 @@
     padding: 5px 6px;
     font-weight: 500;
     font-size: 0.75rem;
-    margin-top: 24px;
     white-space: nowrap;
 }
 
 .categoria {
     background-color: #F2DBD5;
     color: #D9B2A9;
-    padding: 3.5px 8.5px;
+    padding: 5px 6px;
     border: 0;
     border-radius: 15px;
 }
 
 @media (min-width: 601px) and (max-width: 1200px) {
-
     .coluna-done,
     .coluna-to-do,
     .coluna-in-progress {
@@ -146,12 +143,10 @@
     }
 }
 
-@media (min-width: 1201px) and (max-width: 1300px) {
-
+/* @media (min-width: 1201px) and (max-width: 1300px) {
     .high-importance,
     .low-importance,
     .medium-importance {
-        padding: 4px 7px;
         font-size: 0.60rem;
         margin-top: 24px;
         white-space: nowrap;
@@ -160,4 +155,4 @@
     .titulos-task h4 {
         font-size: 1.1rem;
     }
-}
+} */
