@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +7,7 @@
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/colunas-tarefas.css">
     <title>Visualização de Tarefas</title>
-
 </head>
-
 <body>
     <main class="conteudo-visualizacao">
         <aside class="menu-lateral">
@@ -35,7 +32,6 @@
                     <img src="/img/bell.svg" alt="">
                     <li><a href="/notificacoes?name={{userName}}&email={{email}}">Notification</a></li>
                 </div>
-
             </ul>
         </aside>
 
@@ -47,30 +43,25 @@
                         <a href="https://github.com/JenniGabriely01/to-do-list" target="_blank">
                             <img src="/img/info.svg" alt="icone info">
                         </a>
-                        <a class="add-task" href="/register">+ Add task</a>
+                        <a class="add-task" href="/register?name={{userName}}&email={{email}}">+ Add task</a>
                     </div>
                 </div>
                 <hr class="hr-header">
             </header>
 
-
-
             <div class="colunas">
-
                 <div class="coluna-to-do">
                     <h3>To Do</h3>
                     {{#each toDoTasks}}
                     <div class="card-tarefa">
                         <div class="titulos-task">
                             <h4>{{nome}}</h4>
-                            <a href="/visualizacao/{{id}}">View Details</a>
+                            <a href="/visualizacao/{{this.id}}?name={{../userName}}&email={{../email}}">View Details</a>
                             <p>{{data_criacao}}</p>
                         </div>
 
                         <div class="buttons">
-                            <button class="categoria">
-                                {{categoria}}
-                            </button>
+                            <button class="categoria">{{categoria}}</button>
                             {{#ifEquals nivel_importancia 'alto'}}
                             <button class="importance-btn high-importance">High importance</button>
                             {{else ifEquals nivel_importancia 'medio'}}
@@ -79,7 +70,6 @@
                             <button class="importance-btn low-importance">Low importance</button>
                             {{/ifEquals}}
                         </div>
-
                     </div>
                     {{/each}}
                 </div>
@@ -88,17 +78,14 @@
                     <h3>In Progress</h3>
                     {{#each inProgressTasks}}
                     <div class="card-tarefa">
-
                         <div class="titulos-task">
                             <h4>{{nome}}</h4>
-                            <a href="/visualizacao/{{id}}">View Details</a>
+                            <a href="/visualizacao/{{this.id}}?name={{../userName}}&email={{../email}}">View Details</a>
                             <p>{{data_criacao}}</p>
                         </div>
 
                         <div class="buttons">
-                            <button class="categoria">
-                                {{categoria}}
-                            </button>
+                            <button class="categoria">{{categoria}}</button>
                             {{#ifEquals nivel_importancia 'alto'}}
                             <button class="importance-btn high-importance">High importance</button>
                             {{else ifEquals nivel_importancia 'medio'}}
@@ -107,7 +94,6 @@
                             <button class="importance-btn low-importance">Low importance</button>
                             {{/ifEquals}}
                         </div>
-
                     </div>
                     {{/each}}
                 </div>
@@ -118,14 +104,12 @@
                     <div class="card-tarefa">
                         <div class="titulos-task">
                             <h4>{{nome}}</h4>
-                            <a href="/visualizacao/{{id}}">View Details</a>
+                            <a href="/visualizacao/{{this.id}}?name={{../userName}}&email={{../email}}">View Details</a>
                             <p>{{data_criacao}}</p>
                         </div>
 
                         <div class="buttons">
-                            <button class="categoria">
-                                {{categoria}}
-                            </button>
+                            <button class="categoria">{{categoria}}</button>
                             {{#ifEquals nivel_importancia 'alto'}}
                             <button class="importance-btn high-importance">High importance</button>
                             {{else ifEquals nivel_importancia 'medio'}}
@@ -134,16 +118,11 @@
                             <button class="importance-btn low-importance">Low importance</button>
                             {{/ifEquals}}
                         </div>
-
                     </div>
                     {{/each}}
                 </div>
             </div>
-
         </section>
     </main>
-
-
 </body>
-
 </html>

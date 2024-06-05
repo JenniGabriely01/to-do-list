@@ -4,10 +4,8 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql2');
 const path = require('path');
 
-
 const app = express();
 const port = 3000;
-
 
 // Criar a conexão com o banco de dados fora das rotas
 const connection = mysql.createConnection({
@@ -16,8 +14,6 @@ const connection = mysql.createConnection({
     password: 'root',
     database: 'listatarefas'
 });
-
-
 
 // Estabelecer a conexão com o MySQL
 connection.connect((err) => {
@@ -43,9 +39,6 @@ const hbs = exphbs.create({
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-
-app.set('view engine', 'handlebars');
-
 // Middleware para análise do corpo da solicitação
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -59,10 +52,12 @@ app.get("/", (req, res) => {
 
 // Rota para lidar com o cadastro de tarefa
 app.post('/cadastrar-tarefa', (req, res) => {
-    const { nome, estado, nivel_importancia, categoria, data_criacao } = req.body;
+    const { nome, estado, nivel_importancia, categoria, data_criacao, name, email } = req.body;
+    const userName = name || 'Visitor';
+    const emailValue = email || 'seuemail@email.com';
+
     console.log('Dados recebidos:', { nome, estado, nivel_importancia, categoria, data_criacao });
 
-    // Realizar a consulta para inserir a tarefa
     connection.query('INSERT INTO Tarefas (nome, estado, nivel_importancia, categoria, data_criacao) VALUES (?, ?, ?, ?, ?)',
         [nome, estado, nivel_importancia, categoria, data_criacao],
         (err, results) => {
@@ -70,12 +65,10 @@ app.post('/cadastrar-tarefa', (req, res) => {
                 console.error('Erro ao inserir tarefa:', err);
                 res.status(500).send('Erro ao salvar tarefa');
             } else {
-                // Se a tarefa for salva com sucesso, redirecione o usuário para a página de visualização
-                res.redirect('/visualizacao');
+                res.redirect(`/visualizacao?name=${userName}&email=${emailValue}`);
             }
         });
 });
-
 
 // Rota para exibir a página de visualização das tarefas
 app.get("/visualizacao", (req, res) => {
@@ -114,12 +107,21 @@ app.get("/visualizacao", (req, res) => {
 });
 
 app.get('/register', (req, res) => {
-    res.render('register')
-})
+    const userName = req.query.name || 'Visitor';
+    const email = req.query.email || 'seuemail@email.com';
 
-/* ver detalhes da tarefa por id */
+    res.render('register', {
+        userName: userName,
+        email: email,
+    });
+});
+
+// Ver detalhes da tarefa por id
 app.get('/visualizacao/:id', (req, res) => {
     const id = req.params.id;
+    const userName = req.query.name || 'Visitor';
+    const email = req.query.email || 'seuemail@email.com';
+
     const sql = 'SELECT * FROM Tarefas WHERE id = ?';
 
     connection.query(sql, [id], (err, data) => {
@@ -129,15 +131,12 @@ app.get('/visualizacao/:id', (req, res) => {
         } else {
             if (data.length > 0) {
                 const edit = data[0];
-                /* converte a string da data em um obj DATE no javascript */
                 const date = new Date(edit.data_criacao);
                 const year = date.getFullYear();
-                /* getMonth() + 1 - garente que o mês vai ser entre janeiro e dezembro ( 1 a 12) */
-                /* padStart - garantindo que serão sempre dois números, adicionando um 0 se necessário */
                 const month = String(date.getMonth() + 1).padStart(2, '0');
                 const day = String(date.getDate()).padStart(2, '0');
-                edit.data_criacao = `${year}-${month}-${day}`
-                res.render('edit', { edit });
+                edit.data_criacao = `${year}-${month}-${day}`;
+                res.render('edit', { edit, userName, email });
             } else {
                 res.status(404).send('Tarefa não encontrada');
             }
@@ -145,40 +144,44 @@ app.get('/visualizacao/:id', (req, res) => {
     });
 });
 
-/* rota editar a tarefa */
-app.post("/visualizacao/update", (req, res) => {
-    const { id, nome, estado, nivel_importancia, categoria, data_criacao } = req.body;
-
-    const sql = `UPDATE Tarefas SET nome = '${nome}', estado = '${estado}', nivel_importancia = '${nivel_importancia}', categoria = '${categoria}', data_criacao = '${data_criacao}' WHERE id = ${id}`;
-
-    connection.query(sql, function (err) {
-        if (err) {
-            console.log("error", err);
-            return;
-        }
-
-        res.redirect('/visualizacao');
-    });
-});
-
-/* lógica e rota para remover tarefas */
 app.post('/remove/:id', (req, res) => {
     const id = req.params.id;
+    const userName = req.body.name || 'Visitor';
+    const email = req.body.email || 'seuemail@email.com';
+
     const sql = `DELETE FROM Tarefas WHERE id = ${id}`;
     connection.query(sql, function (err) {
         if (err) {
             console.log(err);
             res.status(500).send('Erro ao remover tarefa');
         } else {
-            res.redirect('/visualizacao');
+            res.redirect(`/visualizacao?name=${userName}&email=${email}`);
         }
     });
 });
 
-/* rota para perfil */
+// Rota editar a tarefa
+app.post("/visualizacao/update", (req, res) => {
+    const { id, nome, estado, nivel_importancia, categoria, data_criacao, name, email } = req.body;
+    const userName = name || 'Visitor';
+    const emailValue = email || 'seuemail@email.com';
+
+    const sql = `UPDATE Tarefas SET nome = ?, estado = ?, nivel_importancia = ?, categoria = ?, data_criacao = ? WHERE id = ?`;
+
+    connection.query(sql, [nome, estado, nivel_importancia, categoria, data_criacao, id], function (err) {
+        if (err) {
+            console.log("error", err);
+            return;
+        }
+
+        res.redirect(`/visualizacao?name=${userName}&email=${emailValue}`);
+    });
+});
+
+// Rota para perfil
 app.get("/perfil", (req, res) => {
     const userName = req.query.name || 'Visitor';
-    const email = req.query.email || 'seuemail@email.com'; 
+    const email = req.query.email || 'seuemail@email.com';
 
     res.render('perfil', {
         userName: userName,
@@ -186,12 +189,10 @@ app.get("/perfil", (req, res) => {
     });
 });
 
-
-/* rota para notificações */
+// Rota para notificações
 app.get('/notificacoes', (req, res) => {
     const userName = req.query.name || 'Visitor';
     const email = req.query.email || 'seuemail@email.com';
-
 
     connection.query('SELECT * FROM Tarefas', (err, results) => {
         if (err) {
@@ -211,13 +212,13 @@ app.get('/notificacoes', (req, res) => {
                 const dayDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
                 if (dayDiff === 0) {
-                    /* caso a tarefa expirar hoje */
+                    // Caso a tarefa expirar hoje
                     notificationsToday.push(`The deadline for task <strong>${task.nome}</strong> is today. Please ensure all necessary actions are taken to complete it on time.`);
                 } else if (dayDiff === 1) {
-                    /* caso a tarefa expirar amanhã */
+                    // Caso a tarefa expirar amanhã
                     notificationsTomorrow.push(`Attention! The deadline for task <strong>${task.nome}</strong> is approaching rapidly. Ensure all necessary actions are taken to meet the deadline effectively.`);
                 } else if (dayDiff < 0) {
-                    /* caso ela ja esteja expirada */
+                    // Caso ela já esteja expirada
                     notificationsExpired.push(`The deadline for task <strong>${task.nome}</strong> has passed. Please review and address any outstanding items immediately to minimize any potential impact on our project timeline.`);
                 }
             });
@@ -233,9 +234,6 @@ app.get('/notificacoes', (req, res) => {
         }
     });
 });
-
-
-
 
 // Fechar a conexão quando o servidor for encerrado
 process.on('SIGINT', () => {
