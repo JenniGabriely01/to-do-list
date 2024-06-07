@@ -1,5 +1,5 @@
 ## To-do list
-O projeto Task Manager é uma aplicação web desenvolvida para ajudar os usuários a gerenciar suas tarefas de forma eficiente. Com uma interface intuitiva e funcionalidades poderosas, o Task Manager permite que os usuários registrem, visualizem e acompanhem o progresso de suas tarefas de maneira organizada.
+O projeto Task Manager é uma aplicação web desenvolvida para ajudar os usuários a gerenciar suas tarefas de forma eficiente. Com uma interface intuitiva e funcionalidades poderosas, o Task Manager permite que os usuários registrem, visualizem e acompanhem o progresso de suas tarefas de maneira organizada e se uma tarefa passou da data que foi colocada, na rota de notificações aparece uma mensagem avisando que a tarefa expirou.
 
 
 
@@ -16,6 +16,8 @@ As tarefas registradas são exibidas em diferentes colunas, de acordo com seu es
 Os usuários podem visualizar detalhes de cada tarefa, incluindo seu nome, data de criação e categoria.
 
 As tarefas são classificadas por nível de importância, permitindo uma fácil identificação das prioridades
+
+Gerenciamento de prazo: caso uma tarefa passar da data estabelecida, aparecerá uma notificação na rota "notificacoes"
 
 É possivel editar a tarefa e exclui-la 
 
@@ -62,7 +64,6 @@ data_criacao date
 ### No terminal coloque 
 ```
 git clone https://github.com/JenniGabriely01/to-do-list.git
-cd to-do-list
 npm i
 npx nodemon index.js
 ```
