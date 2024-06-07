@@ -134,3 +134,13 @@ form {
     letter-spacing: 0em;
   }
  
+
+  @media (max-width: 1200px) {
+    .conteudo-direita {
+        display: none;
+    }
+
+    .conteudo-esquerda {
+        padding: 2%;
+    }
+}

@@ -39,10 +39,17 @@
     color: #A5A68F;
     font-size: 1.2rem;
     font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.input-info p{
+    color: #A5A68F;
+    margin-bottom: 5px;
+    font-weight: 500;
 }
 
 .perfil{
-    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .perfil p{

@@ -2,6 +2,7 @@
     <link rel="stylesheet" href="/css/menu-lateral.css">
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/notificacoes.css">
+    <link rel="stylesheet" href="/css/perfil.css">
 </head>
 
 <main class="conteudo-visualizacao">
@@ -19,7 +20,7 @@
             </div>
 
             <div class="link">
-                <img src="/img/Myprofile.svg" alt="">
+                <img src="/img/perfil.svg" alt="">
                 <li><a href="/perfil?name={{userName}}&email={{email}}">My Profile</a></li>
             </div>
 
@@ -49,6 +50,14 @@
 </main>
 
 <section class="container-notificacoes">
+
+        <div class="perfil">
+            <img src="/img/user.svg" alt="lupa">
+            <div class="titulos-perfil">
+                <h4>{{userName}}</h4>
+                <a href="#">Notifications System</a>
+            </div>
+        </div>
 
     <div class="conteudo-notications">
         <h3>Recent Notifications</h3>
